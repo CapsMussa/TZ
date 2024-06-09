@@ -18,7 +18,7 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <th scope="row" style="padding: 0px 10px;">1</th>
+                    <th scope="row" style="padding: 0px 10px;">{{ $user->id }}</th>
                     <th scope="row" style="padding: 0px 10px;">{{$user->name}}</th>
                     <td style="width: 150px; padding: 0px 10px;">{{$user->email}}</td>
                     <td style="width: 150px; padding: 0px 10px;">{{$user->role}}</td>
