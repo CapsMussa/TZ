@@ -41,7 +41,13 @@
             </div>
 
 
-            <input style="margin-top: 5px;" name="active" type="text" placeholder="Видимость"><br>
+            Видимость <select style="margin-top: 5px;" class="form-select" name="active" aria-label="-">
+                <option value="1">Да</option>
+                <option value="0">Нет</option>
+
+            </select><br>
+
+
             <input style="margin-top: 5px;" type="submit" value="Создать">
         </form>
     </div>
