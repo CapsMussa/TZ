@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Admin\AdminController;
+
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,47 +22,47 @@ use App\Http\Controllers\Admin;
 */
 
 
-Route::get('/admin', [AdminController::class, 'post'])->name('admin.index')->middleware(['middleware' => 'admin']);
-Route::get('/admin/category', [AdminController::class, 'category'])->name('admin.category')->middleware(['middleware' => 'admin']);
-Route::get('/admin/colors', [AdminController::class, 'tag'])->name('admin.colors')->middleware(['middleware' => 'admin']);
-Route::get('/admin/users', [AdminController::class, 'allUsers'])->name('admin.users')->middleware(['middleware' => 'admin']);
 
-Route::get('/admin/categories', 'App\Http\Controllers\Admin\CreateController@category')->middleware(['middleware' => 'admin']);
-Route::get('/admin/tags', 'App\Http\Controllers\Admin\CreateController@tag')->middleware(['middleware' => 'admin']);
-Route::get('/admin/posts', 'App\Http\Controllers\Admin\CreateController@post');
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function (){
 
-Route::post('/admin/categories/store', 'App\Http\Controllers\Admin\StoreController@categories')->name('admin.store.category')->middleware(['middleware' => 'admin']);
-Route::post('/admin/tags/store', 'App\Http\Controllers\Admin\StoreController@tag')->name('admin.store.tag')->middleware(['middleware' => 'admin']);
-Route::post('/admin/posts/store', 'App\Http\Controllers\Admin\StoreController@post')->name('admin.store.post')->middleware(['middleware' => 'admin']);
-Route::post('/admin/posts/user', 'App\Http\Controllers\Admin\StoreController@allUser')->name('admin.store.users')->middleware(['middleware' => 'admin']);
+    Route::group(['namespace' => 'Post'], function (){
+        Route::get('', [PostController::class, 'index'])->name('admin.index');
+        Route::post('/posts/store', [PostController::class,'store'])->name('admin.store.post');//
+        Route::get('/posts/{posts}', [PostController::class, 'edit'])->name('admin.edit.post');
+        Route::patch('/posts/{posts}', [PostController::class, 'update'])->name('admin.update.post');
+        Route::delete('/posts/{posts}', [PostController::class, 'delete'])->name('admin.delete.post');
+    });
 
+    Route::group(['namespace' => 'Categories'], function () {
+        Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+        Route::post('/categories/store', [CategoryController::class, 'store'])->name('admin.store.category');
+        Route::get('/categories/{categories}', [CategoryController::class, 'edit'])->name('admin.edit.category');
+        Route::patch('/category/{categories}', [CategoryController::class, 'update'])->name('admin.update.category');
+        Route::delete('/category/{categories}', [CategoryController::class, 'delete'])->name('admin.delete.category');
+    });
 
-Route::get('/admin/categories/{categories}', 'App\Http\Controllers\Admin\EditController@categories')->name('admin.edit.category')->middleware(['middleware' => 'admin']);
-Route::get('/admin/tags/{tags}', 'App\Http\Controllers\Admin\EditController@tag')->name('admin.edit.tag')->middleware(['middleware' => 'admin']);
-Route::get('/admin/posts/{posts}', 'App\Http\Controllers\Admin\EditController@post')->name('admin.edit.post')->middleware(['middleware' => 'admin']);
-Route::get('/admin/posts/{user}', 'App\Http\Controllers\Admin\EditController@allUser')->name('admin.edit.users')->middleware(['middleware' => 'admin']);
+    Route::group(['namespace' => 'Tags'], function () {
+        Route::get('/colors', [TagController::class, 'index'])->name('admin.colors');
+        Route::post('/tags/store', [TagController::class, 'store'])->name('admin.store.tag');
+        Route::get('/tags/{tags}', [TagController::class, 'edit'])->name('admin.edit.tag');
+        Route::patch('/tags/{tags}', [TagController::class, 'update'])->name('admin.update.tag');
+        Route::delete('/tags/{tags}', [TagController::class, 'delete'])->name('admin.delete.tag');
+    });
 
+    Route::group(['namespace' => 'Users'], function () {
+        Route::get('/user', [UserController::class, 'index'])->name('admin.users');
+        Route::post('/user/user', [UserController::class, 'store'])->name('admin.store.users');
+        Route::get('/user/{user}', [UserController::class, 'edit'])->name('admin.edit.users');
+        Route::patch('/user/{user}', [UserController::class, 'update'])->name('admin.update.users');
+        Route::delete('/user/{user}', [UserController::class, 'delete'])->name('admin.delete.users');
 
-Route::patch('/admin/category/{categories}', 'App\Http\Controllers\Admin\UpdateController@categories')->name('admin.update.category')->middleware(['middleware' => 'admin']);
-Route::patch('/admin/tags/{tags}', 'App\Http\Controllers\Admin\UpdateController@tag')->name('admin.update.tag')->middleware(['middleware' => 'admin']);
-Route::patch('/admin/posts/{posts}', 'App\Http\Controllers\Admin\UpdateController@post')->name('admin.update.post')->middleware(['middleware' => 'admin']);
-Route::patch('/admin/posts/{user}', 'App\Http\Controllers\Admin\UpdateController@allUser')->name('admin.update.users')->middleware(['middleware' => 'admin']);
-
-
-Route::delete('/admin/category/{categories}', 'App\Http\Controllers\Admin\DeleteController@categories')->name('admin.delete.category')->middleware(['middleware' => 'admin']);
-Route::delete('/admin/tags/{tags}', 'App\Http\Controllers\Admin\DeleteController@tag')->name('admin.delete.tag')->middleware(['middleware' => 'admin']);
-Route::delete('/admin/posts/{posts}', 'App\Http\Controllers\Admin\DeleteController@post')->name('admin.delete.post')->middleware(['middleware' => 'admin']);
-Route::delete('/admin/user/{users}', 'App\Http\Controllers\Admin\DeleteController@allUser')->name('admin.delete.users')->middleware(['middleware' => 'admin']);
+    });
+});
 
 Auth::routes();
 
-
-Route::get('/index', 'App\Http\Controllers\StartController@index2')->name('index.users');
-Route::get('/index2', 'App\Http\Controllers\StartController@index2');
-
-
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [StartController::class, 'index'])->name('index.users');
+Route::get('/index', [HomeController::class, 'index'])->name('home');
 
 
 

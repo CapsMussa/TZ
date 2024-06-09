@@ -32,69 +32,31 @@
             </div>
         </div>
     </main>
-    <div  style="margin-left: 250px; float:left; width: 50%; height: 800px; overflow-y:scroll">
-
-        @foreach($posts as $post)
-            <div style=" float:left; margin: 10px; padding:5px; width: 200px; height: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
-                <div style=" float: left; width: 100%; height: 200px; background-color: lightblue;">
-                    <img style="width: 100%; height: 200px;" src="{{url('storage/'.$post->src)}}">
-                    <div style="width: 100%; font-size: 14px; padding: 3px;"> {{ $post->name }}</div>
-                    <div style="background-color: #FAF0E6;width: 100%; padding: 3px;"> {{ $post->price }} руб.</div>
-                    <button style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; float: right; margin-top: -30px;" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2{{$post->id}}" aria-expanded="false" aria-controls="multiCollapseExample2">Выбрать</button>
-
-
-                    <div class="row" >
-                        <div class="col">
-                            <div style="position: absolute; top:150px; left: 200px; width: 1000px; height: 500px;" class="collapse multi-collapse" id="multiCollapseExample2{{$post->id}}">
-                                <div class="card card-body">
-                                    <button class="btn btn-close" style="float: right;" type="button"  data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2{{$post->id}}" aria-expanded="false"></button>
-                                    <img style="width: 30%; height: fit-content;" src="{{url('storage/'.$post->src)}}">
-                                    <div style="width: 100%; font-size: 18px; padding: 3px;"> {{ $post->name }}</div>
-                                    <div style="background-color: #FAF0E6; color: #555; font-size: 20px ;width: 100%; padding: 3px;"> {{ $post->price }} руб.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-
-
-
-
-    <div class="container" style="float: left;">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img style="width: 100%; height: 200px;" src="{{url('storage/'.$post->src)}}">
-                    <div class="card-body">
-                        <p class="card-text">{{ $post->name }}</p>
-                        <p class="card-text" style="background-color: #FAF0E6; color: #555;">{{ $post->price }} руб.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2{{$post->id}}" aria-expanded="false" aria-controls="multiCollapseExample2">View</button>
-                            </div>
-                            <div class="row" >
-                                <div class="col">
-                                    <div style="position: absolute; top:150px; left: 200px; width: 1000px; height: 500px;" class="collapse multi-collapse" id="multiCollapseExample2{{$post->id}}">
-                                        <div class="card card-body">
-                                            <button class="btn btn-close" style="float: right;" type="button"  data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2{{$post->id}}" aria-expanded="false"></button>
-                                            <img style="width: 30%; height: fit-content;" src="{{url('storage/'.$post->src)}}">
-                                            <div style="width: 100%; font-size: 18px; padding: 3px;"> {{ $post->name }}</div>
-                                            <div style="background-color: #FAF0E6; color: #555; font-size: 20px ;width: 100%; padding: 3px;"> {{ $post->price }} руб.</div>
+    <main>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-2">
+                    @foreach($posts as $post)
+                        <div class="col" style="padding: 10px 20px;">
+                            <div class="card shadow-sm">
+                                <img style="margin-left: 25px; width: 70%; height:200px;" src="{{url('storage/'.$post->src)}}">
+                                <div class="card-body" style="height: 130px; margin-top: -15px;">
+                                    {{$post->name}}
+                                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 15px;">
+                                        {{ $post->price }}
+                                        <div class="btn-group" tabindex="0">
+                                            <div data-bs-theme="dark">
+                                                <div class="collapse text-bg-dark" id="navbarHeader{{ $post->id }}"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-    </div>
-
+    </main>
 @endsection
 
