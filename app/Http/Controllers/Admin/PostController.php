@@ -34,14 +34,15 @@ class PostController extends Controller
     public function store(PostStoreRequest $request){
         $date = $request->validated();
         $date['src'] = Storage::disk('public')->put('/images', $date['src']);
-        Post::firstOrcreate($date);
+        Post::firstOrCreate($date);
         return redirect()->route('admin.index', compact('date'));
     }
 
     public function update(PostUpdateRequest $request, Post $posts){
         $data = $request->validated();
+        $data['src'] = Storage::disk('public')->put('/images', $data['src']);
         $posts->update($data);
-        return redirect()->route('admin.post');
+        return redirect()->route('admin.index');
     }
 
 }

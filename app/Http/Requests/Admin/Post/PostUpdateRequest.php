@@ -22,12 +22,9 @@ class PostUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required | string',
-            'src' => 'nullable|file',
+            'name' => 'string',
+            'src' => 'file',
             'price' => 'required | string',
-            'active' => 'required | string',
-            'category_id' => 'required|exists:categories,id',
-            'tag_id' => 'required|exists:tags,id'
         ];
     }
 }
