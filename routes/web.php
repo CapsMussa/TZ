@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function (){
 
 Auth::routes();
 
-Route::get('/index', [StartController::class, 'index'])->name('index.users');
+Route::get('/', [StartController::class, 'index'])->name('index.users');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
