@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function (){
 
     Route::group(['namespace' => 'Post'], function (){
-        Route::get('', [PostController::class, 'index'])->name('admin.index');
+        Route::get('/index', [PostController::class, 'index'])->name('admin.index');
         Route::post('/posts/store', [PostController::class,'store'])->name('admin.store.post');//
         Route::get('/posts/{posts}', [PostController::class, 'edit'])->name('admin.edit.post');
         Route::patch('/posts/{posts}', [PostController::class, 'update'])->name('admin.update.post');

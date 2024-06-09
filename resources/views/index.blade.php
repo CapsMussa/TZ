@@ -18,7 +18,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
             </div>
             <div style="text-align: center;">
-                <form action="../index" method="get">
+                <form action="../" method="get">
                     <input type="text" name="name" placeholder="Найти">
                     <input type="submit" value="Найти">
                 </form>
@@ -42,8 +42,8 @@
                                 <img style="margin-left: 25px; width: 70%; height:200px;" src="{{url('storage/'.$post->src)}}">
                                 <div class="card-body" style="height: 130px; margin-top: -15px;">
                                     {{$post->name}}
-                                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 15px;">
-                                        {{ $post->price }}
+                                    <div class="d-flex justify-content-between align-items-center" style="margin-top: 5px;">
+                                        {{ $post->price }} руб.
                                         <div class="btn-group" tabindex="0">
                                             <div data-bs-theme="dark">
                                                 <div class="collapse text-bg-dark" id="navbarHeader{{ $post->id }}"></div>
