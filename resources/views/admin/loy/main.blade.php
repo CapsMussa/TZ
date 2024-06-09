@@ -12,20 +12,10 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
         crossorigin="anonymous"></script>
 
-
     <title>Админ панель</title>
 </head>
 <body id="vse">
-
 <div style="float: left; border-right: 1px solid green; text-align: center;">
-    <div style="margin-top: 10px; width: 400px;">
-        <h2>Настройка магазина</h2>
-        <form action="">
-            <input style="margin-top: 5px;" type="text" placeholder="Название магазина"><br>
-            <input style="margin-top: 5px;" type="submit" value="Сохранить">
-        </form>
-    </div>
-
 
     <div style="margin-top: 50px; text-align: left;">
         <h2>Создать карточку товар</h2>
@@ -106,7 +96,6 @@
         <a style="margin: 10px;" class="nav-link" href="{{ route('admin.users') }}">Пользователи</a>
     </nav>
 </div>
-
 
 <div id="content">
     @yield('content')
