@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Admin\Post\PostFilterRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -19,10 +20,13 @@ class HomeController extends Controller
     }
 
 
+
     public function index()
     {
         $posts = Post::all();
-        return view('home', compact('posts'));
+        $categories_idx = Category::all();
+        return view('index2', compact('posts', 'categories_idx'));
     }
+
 
 }

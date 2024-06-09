@@ -22,7 +22,8 @@ class PostFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string'
+            'name' => '',
+            'category_id' => 'integer'
         ];
     }
 }
