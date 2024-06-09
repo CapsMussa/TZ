@@ -35,6 +35,7 @@
     <main>
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
+               Найдено:  {{ $posts->count() }} шт.
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-2">
                     @foreach($posts as $post)
                         <div class="col" style="padding: 10px 20px;">

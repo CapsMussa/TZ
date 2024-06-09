@@ -39,8 +39,6 @@
                     @endforeach
                 </select>
             </div>
-
-
             Видимость <select style="margin-top: 5px;" class="form-select" name="active" aria-label="-">
                 <option value="1">Да</option>
                 <option value="0">Нет</option>
@@ -51,7 +49,6 @@
             <input style="margin-top: 5px;" type="submit" value="Создать">
         </form>
     </div>
-
     <div style="margin-top: 10px; width: 400px;">
         <h2>Создать категорию</h2>
         <form action="{{ route('admin.store.category') }}" method="post">
@@ -69,7 +66,6 @@
         <button style="margin-top: 5px;" class="sbt" value="Создать"> Создать</button>
         {{--        </form>--}}
     </div>
-
     <script>
         $(document).ready(function () {
         });
@@ -89,10 +85,8 @@
             $('input.title_firm').val('');
                 $( "#table" ).append( html );
             });
-
         })
     </script>
-
 </div>
 <div style="padding: 20px;">
     <nav class="nav">
