@@ -15,35 +15,39 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.page.categories', compact('categories', 'tags'));
     }
 
 
-    public function delete($id){
+    public function delete($id)
+    {
         $category = Category::find($id);
         $category->delete();
         return redirect()->route('admin.category');
     }
 
 
-    public function edit($id){
+    public function edit($id)
+    {
         $data = Category::find($id);
         return view('admin.page.edit.category', compact('data'));
     }
 
 
-    public function store(StoreRequest $request){
+    public function store(StoreRequest $request)
+    {
         $date = $request->validated();
         Category::firstOrcreate($date);
         return redirect()->route('admin.category');
     }
 
 
-
-    public function update(StoreRequest $request, Category $categories){
+    public function update(StoreRequest $request, Category $categories)
+    {
         $data = $request->validated();
         $categories->update($data);
         return redirect()->route('admin.category');

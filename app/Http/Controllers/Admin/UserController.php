@@ -15,25 +15,29 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $categories = Category::all();
         $tags = Tag::all();
         $users = User::all();
-        return view('admin.page.users',  compact('users', 'categories', 'tags'));
+        return view('admin.page.users', compact('users', 'categories', 'tags'));
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $users = User::find($id);
         $users->delete();
         return redirect()->route('admin.users');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $users = User::find($id);
         return view('admin.page.edit.users', compact('users'));
     }
 
-    public function update(UserStoreRequest $request, User $user){
+    public function update(UserStoreRequest $request, User $user)
+    {
         $users = $request->validated();
         $user->update($users);
         return redirect()->route('admin.users');

@@ -11,34 +11,44 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Interfaces\ImageManagerInterface;
+
 class PostController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $posts = Post::with('category')->get();
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.page.index', compact('posts', 'categories', 'tags'));
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $posts = Post::find($id);
         $posts->delete();
         return redirect()->route('admin.index');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $data = Post::find($id);
         return view('admin.page.edit.post', compact('data'));
     }
 
-    public function store(PostStoreRequest $request){
+    public function store(PostStoreRequest $request)
+    {
         $date = $request->validated();
         $date['src'] = Storage::disk('public')->put('/images', $date['src']);
         Post::firstOrCreate($date);
         return redirect()->route('admin.index', compact('date'));
     }
 
-    public function update(PostUpdateRequest $request, Post $posts){
+    public function update(PostUpdateRequest $request, Post $posts)
+    {
         $data = $request->validated();
         $data['src'] = Storage::disk('public')->put('/images', $data['src']);
         $posts->update($data);
