@@ -61,32 +61,12 @@
 
     <div style="margin-top: 10px; width: 400px;">
         <h2>Создать Фирму</h2>
-        {{--        <form action="{{ route('admin.store.tag') }}" method="post">--}}
+                <form action="{{ route('admin.store.tag') }}" method="post">
+                    @csrf
         <input style="margin-top: 5px;" class="title_firm" type="text" name="title" placeholder="Добавить фирму"><br>
         <button style="margin-top: 5px;" class="sbt" value="Создать"> Создать</button>
-        {{--        </form>--}}
+                </form>
     </div>
-    <script>
-        $(document).ready(function () {
-        });
-        $('button.sbt').on('click', function () {
-            var title = $('input.title_firm').val();
-            $.ajaxSetup({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-            });
-            $.ajax({
-                method: "POST",
-                url: `{{route('admin.store.tag') }}`,
-                data: {title: title},
-                cache: false
-            })
-
-        .done(function( html ) {
-            $('input.title_firm').val('');
-                $( "#table" ).append( html );
-            });
-        })
-    </script>
 </div>
 <div style="padding: 20px;">
     <nav class="nav">

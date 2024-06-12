@@ -39,21 +39,34 @@
                 Найдено: {{ $posts->count() }} шт.
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-2">
                     @foreach($posts as $post)
-                        <div class="col" style="padding: 10px 20px;">
-                            <div class="card shadow-sm">
-                                <img
-                                     src="{{url('storage/pre_'.$post->src)}}">
-                                <div class="card-body" style="height: 130px; margin-top: -15px;">
-                                    {{$post->name}}
-                                    <div class="d-flex justify-content-between align-items-center"
-                                         style="margin-top: 5px;">
-                                        {{ $post->price }} руб.
-                                        <div class="btn-group" tabindex="0">
-                                            <div data-bs-theme="dark">
-                                                <div class="collapse text-bg-dark"
-                                                     id="navbarHeader{{ $post->id }}"></div>
-                                            </div>
+                        <button type="button" class="btn" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal{{ $post->id }}">
+
+                            <div class="col" style="padding: 10px 20px;">
+                                <div class="card shadow-sm">
+                                    <img
+                                        src="{{url('storage/pre_'.$post->src)}}">
+                                    <div class="card-body" style="height: 130px; margin-top: -15px;">
+                                        {{$post->name}}
+                                        <div class="d-flex justify-content-between align-items-center"
+                                             style="margin-top: 5px;">
+                                            {{ $post->price }} руб.
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                        <div class="modal fade" id="exampleModal{{ $post->id }}" tabindex="-1"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $post->name }}</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Закрыть"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img class="w-100" src="{{url('storage/'.$post->src)}}">
                                     </div>
                                 </div>
                             </div>
@@ -63,5 +76,6 @@
             </div>
         </div>
     </main>
+
 @endsection
 

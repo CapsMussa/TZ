@@ -16,7 +16,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category')->get();
+        $posts = Post::with('category', 'tags')->get();
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.page.index', compact('posts', 'categories', 'tags'));
@@ -42,8 +42,8 @@ class PostController extends Controller
 
         Post::firstOrCreate($date);
 
-        $reviewPath =  Image::make('storage/'.$date['src'])->fit(200,200);
-        $date['src'] = $reviewPath->save('storage/pre_'.$date['src']);
+        $reviewPath = Image::make('storage/' . $date['src'])->fit(200, 200);
+        $date['src'] = $reviewPath->save('storage/pre_' . $date['src']);
 
 
         return redirect()->route('admin.index', compact('date'));
