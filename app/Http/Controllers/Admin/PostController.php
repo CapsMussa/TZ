@@ -8,13 +8,9 @@ use App\Http\Requests\Admin\Post\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\Interfaces\ImageManagerInterface;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -42,8 +38,14 @@ class PostController extends Controller
     public function store(PostStoreRequest $request)
     {
         $date = $request->validated();
-        $date['src'] = Storage::disk('public')->put('/images', $date['src']);
+        $date['src'] = Storage::disk('public')->put('', $date['src']);
+
         Post::firstOrCreate($date);
+
+        $reviewPath =  Image::make('storage/'.$date['src'])->fit(200,200);
+        $date['src'] = $reviewPath->save('storage/pre_'.$date['src']);
+
+
         return redirect()->route('admin.index', compact('date'));
     }
 

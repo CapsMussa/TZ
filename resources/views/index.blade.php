@@ -41,8 +41,8 @@
                     @foreach($posts as $post)
                         <div class="col" style="padding: 10px 20px;">
                             <div class="card shadow-sm">
-                                <img style="margin-left: 25px; width: 70%; height:200px;"
-                                     src="{{url('storage/'.$post->src)}}">
+                                <img
+                                     src="{{url('storage/pre_'.$post->src)}}">
                                 <div class="card-body" style="height: 130px; margin-top: -15px;">
                                     {{$post->name}}
                                     <div class="d-flex justify-content-between align-items-center"
