@@ -15,6 +15,9 @@
     <title>Админ панель</title>
 </head>
 <body id="vse">
+
+<div><a href="/">назад</a></div>
+
 <div style="float: left; border-right: 1px solid green; text-align: center;">
 
     <div style="margin-top: 50px; text-align: left;">

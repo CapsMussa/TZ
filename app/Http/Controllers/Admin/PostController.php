@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Post\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 use Intervention\Image\Facades\Image;
@@ -16,7 +17,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with('category', 'tags')->get();
+        $posts = Post::with('category', 'user')->get();
         $categories = Category::all();
         $tags = Tag::all();
         return view('admin.page.index', compact('posts', 'categories', 'tags'));
@@ -39,6 +40,7 @@ class PostController extends Controller
     {
         $date = $request->validated();
         $date['src'] = Storage::disk('public')->put('', $date['src']);
+        $date['user_id'] = auth()->user()->id;
 
         Post::firstOrCreate($date);
 
@@ -52,7 +54,7 @@ class PostController extends Controller
     public function update(PostUpdateRequest $request, Post $posts)
     {
         $data = $request->validated();
-        $data['src'] = Storage::disk('public')->put('/images', $data['src']);
+        $data['src'] = Storage::disk('public')->put('', $data['src']);
         $posts->update($data);
         return redirect()->route('admin.index');
     }

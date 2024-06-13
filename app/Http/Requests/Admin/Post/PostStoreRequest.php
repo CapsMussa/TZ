@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Post;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostStoreRequest extends FormRequest
@@ -27,7 +28,8 @@ class PostStoreRequest extends FormRequest
             'price' => 'required | string',
             'active' => 'required | string',
             'category_id' => 'required|exists:categories,id',
-            'tag_id' => 'required|exists:tags,id'
+            'user_id' => '',
+
         ];
     }
 }

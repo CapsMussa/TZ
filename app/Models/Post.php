@@ -16,8 +16,8 @@ class Post extends Model
     protected $guarded = false;
 
 
-    public function tags(){
-        return $this->belongsTo(Tag::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
     public function category(){
